@@ -30,13 +30,13 @@ jobs:
       - name: Push test DB schema
         run: node node_modules/prisma/build/index.js db push --skip-generate
         env:
-          DATABASE_URL: file:./prisma/test.db
+          DATABASE_URL: file:${{ github.workspace }}/backend/prisma/test.db
 
       - name: Run tests
         run: npx vitest run
         env:
-          DATABASE_URL: file:./prisma/test.db
-          JWT_SECRET: ci-test-secret-key-minimum-32-chars
+          DATABASE_URL: file:${{ github.workspace }}/backend/prisma/test.db
+          JWT_SECRET: ci-test-secret-key-minimum-32-chars-ok
           ALLOW_DIRECT_EXECUTION: 'true'
           NODE_ENV: test
 

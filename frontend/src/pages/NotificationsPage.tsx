@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Bell, CheckCheck, ArrowLeft } from 'lucide-react';
 import { getNotifications, markNotificationRead, markAllNotificationsRead } from '../api';
 
-interface Notification {
+interface AppNotification {
   id: string;
   type: string;
   title: string;
@@ -27,8 +27,8 @@ function formatDate(iso: string) {
   });
 }
 
-function groupByDay(notifications: Notification[]) {
-  const groups: Record<string, Notification[]> = {};
+function groupByDay(notifications: AppNotification[]) {
+  const groups: Record<string, AppNotification[]> = {};
   for (const n of notifications) {
     const day = new Date(n.createdAt).toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' });
     if (!groups[day]) groups[day] = [];
@@ -38,7 +38,7 @@ function groupByDay(notifications: Notification[]) {
 }
 
 export default function NotificationsPage() {
-  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [notifications, setNotifications] = useState<AppNotification[]>([]);
   const [unread, setUnread] = useState(0);
   const [loading, setLoading] = useState(true);
 

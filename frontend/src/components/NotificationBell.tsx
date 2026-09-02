@@ -4,7 +4,7 @@ import { Bell } from 'lucide-react';
 import { getNotifications, markAllNotificationsRead } from '../api';
 import { getSocket } from '../socket';
 
-interface Notification {
+interface AppNotification {
   id: string;
   type: string;
   title: string;
@@ -34,7 +34,7 @@ function timeAgo(iso: string) {
 
 export default function NotificationBell() {
   const [open, setOpen] = useState(false);
-  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [notifications, setNotifications] = useState<AppNotification[]>([]);
   const [unread, setUnread] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -53,7 +53,7 @@ export default function NotificationBell() {
 
     // Real-time: prepend new notification instantly when server pushes it
     const socket = getSocket();
-    const handleNew = (n: Notification) => {
+    const handleNew = (n: AppNotification) => {
       setNotifications(prev => [n, ...prev].slice(0, 6));
       setUnread(u => u + 1);
     };
