@@ -3,8 +3,8 @@ services:
     name: hr-portal-backend
     runtime: node
     rootDir: backend
-    buildCommand: npm ci && npx prisma generate
-    startCommand: npx prisma db push && node src/index.js
+    buildCommand: npm ci && npx prisma generate --schema=prisma/schema.postgres.prisma
+    startCommand: npx prisma db push --schema=prisma/schema.postgres.prisma && node src/index.js
     envVars:
       - key: NODE_ENV
         value: production
