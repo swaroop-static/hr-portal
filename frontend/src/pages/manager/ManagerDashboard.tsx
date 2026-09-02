@@ -98,6 +98,9 @@ export default function ManagerDashboard() {
 
   return (
     <div className="p-8">
+      <div style={{background:'#dc2626',color:'#fff',padding:'12px 20px',borderRadius:8,marginBottom:16,fontWeight:700}}>
+        DEBUG: Manager component loaded. User: {user?.name} | Role: {user?.role} | Loading: {String(loading)} | Error: {error || 'none'}
+      </div>
       {error && (
         <div className="bg-red-900/30 border border-red-500 text-red-300 px-4 py-3 rounded mb-4">
           {error}
