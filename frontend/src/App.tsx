@@ -49,7 +49,6 @@ function RoleRedirect() {
 
 export default function App() {
   return (
-    <ErrorBoundary>
     <ToastProvider>
     <AuthProvider>
       <BrowserRouter>
