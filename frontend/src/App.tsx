@@ -1,6 +1,22 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Component, ReactNode } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ToastProvider } from './components/ui/Toast';
+
+class ErrorBoundary extends Component<{ children: ReactNode }, { error: string | null }> {
+  state = { error: null };
+  static getDerivedStateFromError(e: Error) { return { error: e.message }; }
+  render() {
+    if (this.state.error) return (
+      <div style={{ padding: 40, fontFamily: 'monospace', background: '#0f172a', color: '#f87171', minHeight: '100vh' }}>
+        <h2 style={{ color: '#fbbf24' }}>Something went wrong</h2>
+        <pre style={{ whiteSpace: 'pre-wrap', marginTop: 16, color: '#94a3b8' }}>{this.state.error}</pre>
+        <button onClick={() => window.location.href = '/'} style={{ marginTop: 24, padding: '8px 20px', background: '#1e3a5f', color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer' }}>Go home</button>
+      </div>
+    );
+    return this.props.children;
+  }
+}
 import Login from './pages/Login';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import ManagerDashboard from './pages/manager/ManagerDashboard';
@@ -49,6 +65,7 @@ function RoleRedirect() {
 
 export default function App() {
   return (
+    <ErrorBoundary>
     <ToastProvider>
     <AuthProvider>
       <BrowserRouter>
@@ -169,5 +186,6 @@ export default function App() {
       </BrowserRouter>
     </AuthProvider>
     </ToastProvider>
+    </ErrorBoundary>
   );
 }
