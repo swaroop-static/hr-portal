@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "PowerShell([System.IO.Directory]::GetDirectories\\(\"C:\\\\Users\\\\swaroop.kandukuri\\\\Desktop\\\\portal\\\\portal_change\"\\))",
+      "PowerShell([System.IO.Directory]::GetDirectories\\(\"C:\\\\Users\\\\swaroop.kandukuri\\\\Desktop\\\\portal\\\\portal_change\\\\portal\"\\))",
+      "PowerShell([System.IO.Directory]::GetDirectories\\(\"C:\\\\Users\\\\swaroop.kandukuri\\\\Desktop\\\\portal\\\\portal_change\\\\portal\\\\portal\"\\))",
+      "PowerShell(netstat *)",
+      "PowerShell(Get-NetFirewallRule *)",
+      "PowerShell(Get-NetConnectionProfile *)",
+      "PowerShell(Get-Command *)",
+      "PowerShell(Start-Process powershell.exe -ArgumentList '-NoExit', '-Command', 'ngrok http 5173 --log=stdout' -WindowStyle Normal; Start-Sleep -Seconds 5; Write-Host \"ngrok started\")",
+      "PowerShell(cd C:\\\\Users\\\\swaroop.kandukuri\\\\Desktop\\\\portal; Start-Process powershell.exe -ArgumentList '-NoExit', '-Command', 'npx localtunnel --port 5173 --subdomain hr-portal-demo' -WindowStyle Normal; Start-Sleep -Seconds 10; Write-Host \"localtunnel started\")",
+      "PowerShell(Start-Sleep -Seconds 8; try { $r = Invoke-WebRequest -Uri 'https://hr-portal-demo.loca.lt' -TimeoutSec 5 -MaximumRedirection 3; \"Status: $\\($r.StatusCode\\)\" } catch { \"Error: $_\" })",
+      "PowerShell(winget install *)",
+      "PowerShell($env:PATH = [System.Environment]::GetEnvironmentVariable\\(\"PATH\", \"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"PATH\", \"User\"\\); Start-Process powershell.exe -ArgumentList '-NoExit', '-Command', '$env:PATH = [System.Environment]::GetEnvironmentVariable\\(\"PATH\",\"Machine\"\\) + \";\" + [System.Environment]::GetEnvironmentVariable\\(\"PATH\",\"User\"\\); cloudflared tunnel --url http://localhost:5173' -WindowStyle Normal; Start-Sleep -Seconds 12; Write-Host \"cloudflared started\")",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri 'https://oxford-francisco-served-resource.trycloudflare.com' -TimeoutSec 15 -MaximumRedirection 3; \"HTTP Status: $\\($r.StatusCode\\) — tunnel is working!\" } catch { \"Error: $_\" })",
+      "PowerShell(try { $r = Invoke-WebRequest -Uri 'https://nutrition-alternate-dawn-approximate.trycloudflare.com' -TimeoutSec 15 -MaximumRedirection 5; \"HTTP $\\($r.StatusCode\\) — tunnel working! Content-Length: $\\($r.RawContentLength\\) bytes\" } catch { \"Error: $\\($_.Exception.Message\\)\" })",
+      "PowerShell(ngrok config *)",
+      "PowerShell(Remove-Item *)",
+      "PowerShell(ngrok update *)",
+      "PowerShell(try { $r = Invoke-RestMethod -Uri 'http://localhost:5000/api/auth/login' -Method POST -Body '{\"email\":\"admin@company.com\",\"password\":\"admin123\"}' -ContentType 'application/json' -TimeoutSec 8; \"Login OK: role=$\\($r.user.role\\)\" } catch { \"Error: $\\($_.Exception.Message\\)\" })",
+      "PowerShell(Start-Process -FilePath \"C:\\\\Users\\\\swaroop.kandukuri\\\\Desktop\\\\cloudflared.exe\" -ArgumentList \"tunnel --url http://localhost:5173\" -RedirectStandardError \"C:\\\\Users\\\\swaroop.kandukuri\\\\Desktop\\\\tunnel_log.txt\" -NoNewWindow)",
+      "Bash(netstat -ano)",
+      "PowerShell(Stop-Process *)",
+      "PowerShell(New-Item *)",
+      "Bash(npx kill-port *)",
+      "Bash(curl -s http://localhost:5000/api/auth/login -X POST -H \"Content-Type: application/json\" -d '{\"email\":\"hr@company.com\",\"password\":\"hr123\"}')",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('Backend OK, token:', d.get\\('token',''\\)[:20]+'...'\\)\")",
+      "Read(//mnt/c/Users/swaroop.kandukuri/**)",
+      "Bash(./cloudflared.exe tunnel *)",
+      "Read(//tmp/**)",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('Backend OK' if 'token' in d else 'FAIL'\\)\")",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); deps=d.get\\('dependencies',{}\\); print\\('multer' in deps, 'multer:', deps.get\\('multer','not found'\\)\\)\")",
+      "Bash(/c/Users/swaroop.kandukuri/Desktop/cloudflared.exe tunnel *)"
+    ]
+  }
+}

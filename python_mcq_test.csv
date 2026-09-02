@@ -1,0 +1,21 @@
+Question,Option A,Option B,Option C,Option D,Correct Answer (A/B/C/D),Type (MCQ/TEXT)
+What is the output of print(type([])) in Python?,<class 'tuple'>,<class 'list'>,<class 'dict'>,<class 'set'>,B,MCQ
+Which keyword is used to define a function in Python?,func,def,function,lambda,B,MCQ
+What does len('hello') return?,4,5,6,3,B,MCQ
+Which of the following is a mutable data type in Python?,str,tuple,list,int,C,MCQ
+What is the correct way to create a dictionary in Python?,{},[],(),({}),A,MCQ
+What will be the output of 2 ** 3 in Python?,6,8,9,5,B,MCQ
+Which method is used to add an element to the end of a list?,append(),add(),insert(),extend(),A,MCQ
+What is the output of bool(0) in Python?,True,None,False,Error,C,MCQ
+Which of the following is used to handle exceptions in Python?,try/catch,try/except,try/handle,catch/except,B,MCQ
+What does the range(1, 5) function return?,1 to 5 inclusive,1 to 4,0 to 5,0 to 4,B,MCQ
+Which symbol is used for single-line comments in Python?,//,#,--,/*,B,MCQ
+What is the output of print(10 // 3)?,3.33,3,4,1,B,MCQ
+Which built-in function returns the largest item in an iterable?,large(),max(),top(),greatest(),B,MCQ
+How do you open a file for reading in Python?,open('file','w'),open('file','r'),open('file','a'),open('file','rw'),B,MCQ
+What is the output of 'hello'[::-1] in Python?,hello,olleh,heoll,Error,B,MCQ
+Which of the following is NOT a Python built-in data type?,array,list,tuple,dict,A,MCQ
+What does the pass statement do in Python?,Exits the loop,Skips the current iteration,Does nothing — acts as a placeholder,Raises an exception,C,MCQ
+What is the correct syntax to inherit a class Parent in Python?,class Child(Parent):,class Child inherits Parent:,class Child extends Parent:,class Child::Parent:,A,MCQ
+What is the output of print(type(None))?,<class 'undefined'>,<class 'NoneType'>,None,<class 'null'>,B,MCQ
+Which module in Python is used to work with regular expressions?,regex,re,regexp,string,B,MCQ

@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run dev *)",
+      "Bash(npm run build *)",
+      "Bash(npm install *)",
+      "Bash(npm install)",
+      "Bash(npx prisma *)",
+      "Bash(node *)",
+      "Bash(ipconfig *)",
+      "Bash(ipconfig)",
+      "Bash(ping -n *)",
+      "Bash(tasklist *)",
+      "Bash(tasklist)",
+      "Bash(curl -s http://localhost:*)",
+      "Bash(curl -s http://localhost:* *)"
+    ]
+  }
+}

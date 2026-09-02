@@ -1,0 +1,9 @@
+node_modules/
+.env
+uploads/
+
+# Test database
+prisma/test.db
+prisma/test.db-journal
+prisma/test.db-shm
+prisma/test.db-wal

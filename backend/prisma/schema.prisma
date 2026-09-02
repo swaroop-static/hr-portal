@@ -1,0 +1,200 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String   @id @default(uuid())
+  email       String   @unique
+  password    String
+  name        String
+  role        String   // ADMIN, MANAGER, HR, INTERVIEWER, CANDIDATE
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  positions       JobPosition[]
+  rounds          Round[]         @relation("InterviewerRounds")
+  tests           Test[]
+  proctorSessions TestAttempt[]   @relation("ProctorAttempts")
+  questions       InterviewQuestion[] @relation("QuestionCreator")
+  templates       InterviewTemplate[] @relation("TemplateCreator")
+  notifications   Notification[]
+}
+
+model JobPosition {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  department  String
+  vacancies   Int      @default(1)
+  managerId   String
+  manager     User     @relation(fields: [managerId], references: [id])
+  status      String   @default("OPEN")
+  createdAt   DateTime @default(now())
+
+  applications Application[]
+}
+
+model Application {
+  id                String   @id @default(uuid())
+  candidateName     String
+  candidateEmail    String
+  candidatePassword String?
+  resumePath        String?
+  resumeName        String?
+  positionId        String
+  position          JobPosition @relation(fields: [positionId], references: [id])
+  status            String   @default("PENDING")
+  notes             String?
+  createdAt         DateTime @default(now())
+
+  rounds Round[]
+}
+
+model Round {
+  id                String   @id @default(uuid())
+  applicationId     String
+  application       Application @relation(fields: [applicationId], references: [id])
+  type              String
+  order             Int
+  status            String   @default("PENDING")
+  notes             String?
+  liveNotes         String?
+  candidateFeedback String?
+  scorecard     String?
+  codeSnapshots CodeSnapshot[]
+  events        InterviewEvent[]
+  interviewerId     String?
+  interviewer       User?    @relation("InterviewerRounds", fields: [interviewerId], references: [id])
+  testId            String?
+  test              Test?    @relation(fields: [testId], references: [id])
+  scheduledAt       DateTime?
+  completedAt       DateTime?
+  createdAt         DateTime @default(now())
+
+  testAttempt TestAttempt?
+  sessionData  String?   // JSON: { code, language, chatHistory, canvas, timerStart }
+}
+
+model Test {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  duration    Int
+  createdById String
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+
+  questions Question[]
+  rounds    Round[]
+}
+
+model Question {
+  id      String  @id @default(uuid())
+  testId  String
+  test    Test    @relation(fields: [testId], references: [id])
+  text    String
+  type    String
+  options String?
+  answer  String?
+  order   Int
+}
+
+model TestAttempt {
+  id             String    @id @default(uuid())
+  roundId        String    @unique
+  round          Round     @relation(fields: [roundId], references: [id])
+  token          String    @unique
+  candidateName  String
+  candidateEmail String
+  proctorId      String?
+  proctor        User?     @relation("ProctorAttempts", fields: [proctorId], references: [id])
+  startedAt      DateTime?
+  submittedAt    DateTime?
+  tabSwitches    Int       @default(0)
+  responses      String?
+  grading        String?
+  gradedById     String?
+  gradedAt       DateTime?
+  status         String    @default("PENDING")
+  score          Int?
+  createdAt      DateTime  @default(now())
+}
+
+model InterviewQuestion {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  difficulty  String   @default("MEDIUM")
+  tags        String?
+  hints       String?
+  solution    String?
+  createdById String
+  createdBy   User     @relation("QuestionCreator", fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+}
+
+model InterviewTemplate {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  department  String?
+  stages      String   // JSON: [{type, order, description}]
+  createdById String
+  createdBy   User     @relation("TemplateCreator", fields: [createdById], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  userId     String?
+  userEmail  String?
+  action     String
+  entityType String
+  entityId   String
+  before     String?
+  after      String?
+  ip         String?
+  createdAt  DateTime @default(now())
+}
+
+model CodeSnapshot {
+  id        String   @id @default(uuid())
+  roundId   String
+  round     Round    @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  code      String
+  language  String
+  runOutput String?
+  savedBy   String
+  createdAt DateTime @default(now())
+}
+
+model InterviewEvent {
+  id           String   @id @default(uuid())
+  roundId      String
+  round        Round    @relation(fields: [roundId], references: [id], onDelete: Cascade)
+  eventType    String
+  actorRole    String
+  actorName    String?
+  metadata     String?
+  bookmarked   Boolean  @default(false)
+  bookmarkNote String?
+  createdAt    DateTime @default(now())
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      String
+  title     String
+  body      String
+  link      String?
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}

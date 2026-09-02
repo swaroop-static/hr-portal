@@ -1,0 +1,11 @@
+node_modules
+.env
+.env.test
+prisma/test.db
+prisma/test.db-journal
+prisma/test.db-shm
+prisma/test.db-wal
+prisma/hr_portal.db
+uploads/resumes/*
+src/__tests__
+*.log
