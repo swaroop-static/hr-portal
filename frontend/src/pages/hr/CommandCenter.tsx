@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Calendar, Clock, AlertCircle, Users, TrendingUp, RefreshCw, ArrowRight } from 'lucide-react';
 import { getCommandCenter } from '../../api';
-import { StatusBadge } from '../../components/ui/StatusBadge';
+import StatusBadge from '../../components/ui/StatusBadge';
 
 interface CommandCenterData {
   todayInterviews: {

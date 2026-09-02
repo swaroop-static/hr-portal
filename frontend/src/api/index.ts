@@ -66,7 +66,7 @@ export const updateLiveNotes = (id: string, liveNotes: string) =>
 export const runCode = (id: string, code: string, language: string) =>
   api.post(`/rounds/${id}/run-code`, { code, language }).then(r => r.data);
 export const getMyRounds = () => api.get('/rounds/interviewer/mine').then(r => r.data);
-export const getCandidateMyTest = () => api.get('/rounds/candidate/my-test').then(r => r.data as { activeTests: any[]; pastTests: any[] });
+export const getCandidateMyTest = () => api.get('/rounds/candidate/my-test').then(r => r.data as { activeTests: any[]; pastTests: any[]; activeInterviews: any[] });
 export const submitScorecard = (id: string, scorecard: any) =>
   api.put(`/rounds/${id}/scorecard`, { scorecard }).then(r => r.data);
 export const saveRoundSession = (id: string, data: { code?: string; language?: string; chatHistory?: any[]; canvas?: string; timerStart?: string }) =>
